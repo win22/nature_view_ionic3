@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only [navPush]="newViewPage">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      NatureView
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let view of natureViewList" (click)="onLoadNatureView(view)">
+      <img [src]="view.immagePath">
+    <ion-card-title>{{view.name}}</ion-card-title>
+  </ion-card>
+</ion-content>
