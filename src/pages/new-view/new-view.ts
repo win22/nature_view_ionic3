@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ModalController} from "ionic-angular";
+import {Modal, ModalController} from "ionic-angular";
 import {SetCoordinatesPage} from "../set-coordinates/set-coordinates";
 
 @Component({
@@ -30,9 +30,43 @@ export class NewViewPage implements OnInit{
     });
   }
 
-  onOpenCoordsModal(){
+  // Ancienne Methde
+  onOpenCoordsModal1(){
     let modal = this.modalCtl.create(SetCoordinatesPage);
     modal.present();
+    // cette fonction permet d'excuter un call back au moment de la fermuture d'un modal
+    modal.onDidDismiss(
+        (data)=>{
+          if (data){
+            this.latitude = data.latitude;
+            this.longitude = data.longitude;
+          }
+        }
+    )
+  }
+
+
+  onOpenCoordsModal(){
+    let modal: Modal;
+
+    if( this.latitude){
+      modal = this.modalCtl.create(SetCoordinatesPage,
+          {latitude: this.latitude,
+                 longitude: this.longitude});
+    }else {
+      modal = this.modalCtl.create(SetCoordinatesPage);
+    }
+
+    modal.present();
+    // cette fonction permet d'excuter un call back au moment de la fermuture d'un modal
+    modal.onDidDismiss(
+        (data)=>{
+          if (data){
+            this.latitude = data.latitude;
+            this.longitude = data.longitude;
+          }
+        }
+    )
   }
 
 

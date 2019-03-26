@@ -24,6 +24,12 @@
     <ion-icon name="flag"></ion-icon>
     Ajouter un lieu
   </button>
+  <ion-list *ngIf="latitude">
+    <ion-item>
+      <!--Afin juste d'avoir 2 chiifre apres la virgule-->
+      <p>Latitude: {{latitude.toFixed(2)}} - Longitude: {{ longitude.toFixed(2)}}</p>
+    </ion-item>
+  </ion-list>
   <button ion-button
           full
           [disabled]="natureViewForm.invalid"
